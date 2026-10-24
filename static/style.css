@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #111827;
+    color: white;
+    padding: 30px;
+}
+.controls {
+    margin: 25px;
+}
+button, select {
+    padding: 10px 15px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+#bars {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 4px;
+    height: 350px;
+    max-width: 1000px;
+    margin: 30px auto;
+}
+.bar {
+    flex: 1;
+    max-width: 35px;
+    background: #b2b0e6;
+    border-radius: 4px 4px 0 0;
+    transition: height 0.15s ease;
+}
+.bar.comparing {
+    background: #f59e0b;
+}
