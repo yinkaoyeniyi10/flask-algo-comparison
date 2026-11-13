@@ -14,7 +14,7 @@ class SortingVisualizerApp:
     self.root.configure(bg="#111827")
 
     self.data = []
-    self.generator = NONE
+    self.generator = None
     self.is_sorting = False
     self.comparisons = 0
     self.swap = 0
