@@ -4,7 +4,7 @@ def bubble_sort(data):
     n = len(arr)
     #Traverse through all variables
     for i in range(n):
-        for j in range(0, n - 1 + 1):
+        for j in range(0, n - i - 1):
             comps += 1
             if arr[j] > arr[j+1]:
                 arr[j], arr[j+1] = arr[j+1], arr[j]

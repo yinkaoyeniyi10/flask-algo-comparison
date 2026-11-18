@@ -19,3 +19,7 @@ class SortingVisualizerApp:
     self.comparisons = 0
     self.swap = 0
     self.start_time = 0
+    self.delay = 50 #Animation delay in milliseconds
+    self.setup_ui()
+    self.generate_new_array()
+  
