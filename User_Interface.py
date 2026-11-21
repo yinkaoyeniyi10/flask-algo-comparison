@@ -30,6 +30,11 @@ class SortingVisualizerApp:
       control_frame, text="Algorithm:", bg="#1f2937", fg="#f9fafb"
       ).pack(side=tk.LEFT, padx=(10, 5), pady=10)
     self.algo_var = tk.StringVar(value=list(ALGORITHMS.keys())[0])
+    #This will act as the dropdown for algorithms
+    algo_menu = ttk.Combobox(control_frame, textvariable=self.algo_var, values=list(ALGORITHMS.keys()), state="readonly", width=15)
+    algo_menu.pack(side=tk.LEFT, padx=5)
+    tk.Button(control_frame, text="New Array", command=self.generate_new_array).pack(side=tk.LEFT, padx=5)
+    tk.Button(control_frame, text="Start", command=self.start_sorting).pack(side=tk.LEFT, padx=5)
   def generate_new_array(self):
     #This is where we will add array/bar drawing logic [WIP]
     pass
