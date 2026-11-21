@@ -44,15 +44,10 @@ class SortingVisualizerApp:
     )
     algo_menu.pack(side=tk.LEFT, padx=5)
 
-  tk.Label(
-    control_frame, text="Size:", bg="#1f2937", fg="#f9fafb"
-  ).pack(side=tk.LEFT, padx=(10, 5))
+    tk.Label(control_frame, text="Size:", bg="#1f2937", fg="#f9fafb").pack(side=tk.LEFT, padx=(10, 5))
 
-  self.size_var = tk.StringVar(value="30")
-  size_menu = ttk.Combobox(
-    control_frame,
-    textvariable=self.size_var,
-    values=["15", "30", "60"])
+    self.size_var = tk.StringVar(value="30")
+    size_menu = ttk.Combobox(control_frame, textvariable=self.size_var, values=["15", "30", "60"])
     
   def generate_new_array(self):
     #This is where we will add array/bar drawing logic [WIP]
