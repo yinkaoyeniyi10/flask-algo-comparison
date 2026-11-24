@@ -69,8 +69,9 @@ class SortingVisualizerApp:
   def sort_step(self):
     try:
       data, comps, swaps, indices = next(self.generator)
-      self.data = data
-      self.comps=self.comps
+      #Update the most recent iterations of the program
+      self.data=data
+      self.comps=comps
       self.swaps=swaps
       self.draw_array(indices)
       self.root.after(self.delay, self.sort_step)
@@ -89,8 +90,19 @@ class SortingVisualizerApp:
     canvas_height=self.canvas.winfo_height()
     bar_width=canvas_width/len(self.data)
     max_value=max(self.data)
+    #This is the logic that draws a rectangle
+    for i, value in enumerate(self.data):
+      bar_height = (value/max_value)*(canvas_height - 20)
+      x1 = i * bar_width
+      y1 = canvas_height - bar_height
+      x2 = (i+1) * bar_width
+      y2 = canvas_height
+      color = "#3b82f6"
+      #if current bar, bar becomes orange
+      if highlight and i in highlight:
+        color="#f97316"
+      self.canvas.create_rectangle(x1, y1, x2, y2, fill=color, outline="")
   def generate_new_array(self):
-    #This is where we will add array/bar drawing logic [WIP]
     size = 10
     self.data = [random.randint(1, 100)]
 print(ALGORITHMS)
