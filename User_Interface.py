@@ -53,6 +53,8 @@ class SortingVisualizerApp:
     size_menu.pack(side=tk.LEFT, padx=5)
     self.start_button = tk.Button(control_frame, text="Start Sorting", command=self.start_sorting, bg="#2563eb", fg="white")
     self.start_button.pack(side=tk.LEFT, padx=10)
+    self.new_array_button = tk.Button(control_frame, text="Generate Array", command=self.generate_new_array, bg="#059669", fg="white")
+    self.new_array_button.pack(side=tk.LEFT, padx=10)
 
 #BEGINS SORTING THE ALGORITHM, IS RUN BY START_BUTTON
   def start_sorting(self):
@@ -103,6 +105,12 @@ class SortingVisualizerApp:
         color="#f97316"
       self.canvas.create_rectangle(x1, y1, x2, y2, fill=color, outline="")
   def generate_new_array(self):
-    size = 10
-    self.data = [random.randint(1, 100)]
+    #Function returns nothing if the algorithm is in the process of sorting.
+    if self.is_sorting:
+      return
+    size = int(self.size_var.get())
+    #Creates (size) number of array members
+    self.data = [random.randint(1, 100) for _ in range(size)]
+    #Runs draw array function at the end
+    self.draw_array()
 print(ALGORITHMS)
