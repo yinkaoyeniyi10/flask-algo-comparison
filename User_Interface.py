@@ -16,7 +16,7 @@ class SortingVisualizerApp:
     self.data = []
     self.generator = None
     self.is_sorting = False
-    self.comparisons = 0
+    self.comps = 0
     self.swaps = 0
     self.start_time = 0
     self.delay = 50 #Animation delay in milliseconds
@@ -51,7 +51,7 @@ class SortingVisualizerApp:
     self.size_var = tk.StringVar(value="30")
     size_menu = ttk.Combobox(control_frame, textvariable=self.size_var, values=["15", "30", "60"])
     size_menu.pack(side=tk.LEFT, padx=5)
-    self.start_button = tk.Button(control_frame, textvariable="Start Sorting", command=self.start_sorting, bg="#2563eb", fg="white")
+    self.start_button = tk.Button(control_frame, text="Start Sorting", command=self.start_sorting, bg="#2563eb", fg="white")
     self.start_button.pack(side=tk.LEFT, padx=10)
 
 #BEGINS SORTING THE ALGORITHM, IS RUN BY START_BUTTON
@@ -61,7 +61,7 @@ class SortingVisualizerApp:
     algorithm = ALGORITHMS[self.algo_var.get()]
     self.generator = algorithm(self.data)
     self.is_sorting=True
-    self.comparisons=0
+    self.comps=0
     self.swaps=0
     self.start_time=time.time()
     self.sort_step()
@@ -91,5 +91,6 @@ class SortingVisualizerApp:
     max_value=max(self.data)
   def generate_new_array(self):
     #This is where we will add array/bar drawing logic [WIP]
-    self.data = [45, 20, 80, 10, 60, 35]
+    size = 10
+    self.data = [random.randint(1, 100)]
 print(ALGORITHMS)
