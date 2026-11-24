@@ -10,3 +10,6 @@ def bubble_sort(data):
                 arr[j], arr[j+1] = arr[j+1], arr[j]
                 swaps += 1
             yield arr.copy(), comps, swaps, (j, j+1)
+ALGORITHMS = {
+    "Bubble Sort": bubble_sort
+}

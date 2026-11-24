@@ -45,11 +45,43 @@ class SortingVisualizerApp:
     algo_menu.pack(side=tk.LEFT, padx=5)
 
     tk.Label(control_frame, text="Size:", bg="#1f2937", fg="#f9fafb").pack(side=tk.LEFT, padx=(10, 5))
-
+    #CREATES CANVAS
+    self.canvas = tk.Canvas(self.root, width=820, height=400, bg="#111827", highlightthickness=0)
+    self.canvas.pack(padx=15, pady=10, fill=tk.BOTH, expand=True)
     self.size_var = tk.StringVar(value="30")
     size_menu = ttk.Combobox(control_frame, textvariable=self.size_var, values=["15", "30", "60"])
     size_menu.pack(side=tk.LEFT, padx=5)
+    self.start_button = tk.Button(control_frame, textvariable="Start Sorting", command=self.start_sorting, bg="#2563eb", fg="white")
+    self.start_button.pack(side=tk.LEFT, padx=10)
+
+#BEGINS SORTING THE ALGORITHM, IS RUN BY START_BUTTON
+  def start_sorting(self):
+    if self.is_sorting:
+      return
+    algorithm = ALGORITHMS[self.algo_var.get()]
+    self.generator = algorithm(self.data)
+    self.is_sorting=True
+    self.comparisons=0
+    self.swaps=0
+    self.start_time=time.time()
+    self.sort_step()
+#DOES THE STEP-BY-STEP INSTRUCTION OF SORTING, IS RUN BY START_SORTING
+  def sort_step(self):
+    try:
+      data, comps, swaps, indices = next(self.generator)
+      self.data = data
+      self.comps=self.comps
+      self.swaps=swaps
+      self.draw_array(indices)
+      self.root.after(self.delay, self.sort_step)
+    except StopIteration:
+      self.is_sorting=False
+      print("Done sorting")
+      print("Comparisons:", self.comps)
+      print("Swaps:", self.swaps)
+      print("Time:", round(time.time() - self.start_time, 4))
     
   def generate_new_array(self):
     #This is where we will add array/bar drawing logic [WIP]
     self.data = [45, 20, 80, 10, 60, 35]
+print(ALGORITHMS)
