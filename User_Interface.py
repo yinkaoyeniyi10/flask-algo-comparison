@@ -48,7 +48,8 @@ class SortingVisualizerApp:
 
     self.size_var = tk.StringVar(value="30")
     size_menu = ttk.Combobox(control_frame, textvariable=self.size_var, values=["15", "30", "60"])
+    size_menu.pack(side=tk.LEFT, padx=5)
     
   def generate_new_array(self):
     #This is where we will add array/bar drawing logic [WIP]
-    pass
+    self.data = [45, 20, 80, 10, 60, 35]
