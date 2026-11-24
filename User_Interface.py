@@ -80,7 +80,15 @@ class SortingVisualizerApp:
       print("Comparisons:", self.comps)
       print("Swaps:", self.swaps)
       print("Time:", round(time.time() - self.start_time, 4))
-    
+  def draw_array(self, highlight=None):
+    #RESETS THE CANVAS FROM WHAT WAS THERE BEFORE
+    self.canvas.delete("all")
+    if not self.data:
+      return
+    canvas_width=self.canvas.winfo_width()
+    canvas_height=self.canvas.winfo_height()
+    bar_width=canvas_width/len(self.data)
+    max_value=max(self.data)
   def generate_new_array(self):
     #This is where we will add array/bar drawing logic [WIP]
     self.data = [45, 20, 80, 10, 60, 35]
