@@ -24,6 +24,7 @@ class SortingVisualizerApp:
     self.delay = 50 #Animation delay in milliseconds
     
     self.setup_ui()
+    self.root.update_idletasks()
     self.generate_new_array()
     self.refresh_history_table()
     
@@ -57,6 +58,9 @@ class SortingVisualizerApp:
     self.start_button.pack(side=tk.LEFT, padx=10)
     self.new_array_button = tk.Button(control_frame, text="Generate Array", command=self.generate_new_array, bg="#059669", fg="white")
     self.new_array_button.pack(side=tk.LEFT, padx=10)
+
+    self.stats_label = tk.Label(self.root, text="Comparisons: 0 | Swaps: 0 | Time: 0", bg="#111827", fg="#f9fafb")
+    self.stats_label.pack(pady=5)
 
 #BEGINS SORTING THE ALGORITHM, IS RUN BY START_BUTTON
   def start_sorting(self):
@@ -115,4 +119,10 @@ class SortingVisualizerApp:
     self.data = [random.randint(1, 100) for _ in range(size)]
     #Runs draw array function at the end
     self.draw_array()
-print(ALGORITHMS)
+    
+  def refresh_history_table(self):
+    for item in self.tree.get_children():
+      self.tree.delete(item)
+    for row in database.fetch_history():
+      self.tree.insert("", "end", values=row)
+
