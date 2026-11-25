@@ -24,4 +24,3 @@ def fetch_history(limit=8):
   rows = cursor.fetchall()
   conn.close()
   return rows
-  
