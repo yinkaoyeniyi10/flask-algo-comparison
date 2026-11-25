@@ -31,16 +31,16 @@ def insertion_sort(data):
         j = i - 1
         while j >= 0:
             comps += 1
-            yeild arr.copy(), comps, swaps, (j, j + 1)
+            yield arr.copy(), comps, swaps, (j, j + 1)
             if arr[j] > key:
                 arr[j +1] = arr[j]
                 swaps += 1
-                yeild arr.copy(), comps, swaps, (j, j+1)
-                 j -= 1
+                yield arr.copy(), comps, swaps, (j, j+1)
+                j -= 1
             else:
                 break
         arr[j + 1] = key
-    yield arr.copy(), comps, swaps()
+    yield arr.copy(), comps, swaps, ()
 
 def selection_sort(data):
     arr = data.copy()
@@ -53,11 +53,11 @@ def selection_sort(data):
             yield arr.copy(), comps, swaps, (min_idx, j)
             if arr[j] < arr[min_idx]:
                 min_idx = j
-            if min_idx != i:
-                arr[i], arr[min_idx] = arr[min_idx], arr[i]
-                swaps += 1
-                yield arr.copy(), comps, swaps, (i, min_idx)
-            yield arr.copy(), comps, swaps, ()
+        if min_idx != i:
+            arr[i], arr[min_idx] = arr[min_idx], arr[i]
+            swaps += 1
+            yield arr.copy(), comps, swaps, (i, min_idx)
+    yield arr.copy(), comps, swaps, ()
             
 
 ALGORITHMS = {
