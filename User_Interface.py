@@ -62,6 +62,13 @@ class SortingVisualizerApp:
     self.stats_label = tk.Label(self.root, text="Comparisons: 0 | Swaps: 0 | Time: 0", bg="#111827", fg="#f9fafb")
     self.stats_label.pack(pady=5)
 
+    columns = ("algorithm", "size", "comparisons", "swaps", "time_s", "timestamp")
+    self.tree = ttk.Treeview(self.root, columns=columns, show="headings", height=5)
+    for col in columns:
+      self.tree.heading(col, text=col)
+      self.tree.column(col, anchor="center", width=120)
+    self.tree.pack(fill=tk.X, padx=15, pady=10)
+
 #BEGINS SORTING THE ALGORITHM, IS RUN BY START_BUTTON
   def start_sorting(self):
     if self.is_sorting:
@@ -73,6 +80,7 @@ class SortingVisualizerApp:
     self.swaps=0
     self.start_time=time.time()
     self.sort_step()
+    
 #DOES THE STEP-BY-STEP INSTRUCTION OF SORTING, IS RUN BY START_SORTING
   def sort_step(self):
     try:
@@ -81,14 +89,22 @@ class SortingVisualizerApp:
       self.data=data
       self.comps=comps
       self.swaps=swaps
+      elapsed = round(time.time() - self.start_time, 4)
+      self.stats_label.config(text=f"Comparisons: {self.comps} | Swaps: {self.swaps} | Time: {elapsed}s")
       self.draw_array(indices)
       self.root.after(self.delay, self.sort_step)
     except StopIteration:
       self.is_sorting=False
+      total_time = round(time.time() - self.start_time, 4)
+      self.stats_label.config(text=f"Comparisons: {self.comps} | Swaps: {self.swaps} | Time: {total_time}s")
+      database.save_run(self.algo_var.get(), len(self.data), self.comps, self.swaps, total_time)
+      self.refresh_history_table()
+    
       print("Done sorting")
       print("Comparisons:", self.comps)
       print("Swaps:", self.swaps)
       print("Time:", round(time.time() - self.start_time, 4))
+      
   def draw_array(self, highlight=None):
     #RESETS THE CANVAS FROM WHAT WAS THERE BEFORE
     self.canvas.delete("all")
@@ -110,6 +126,7 @@ class SortingVisualizerApp:
       if highlight and i in highlight:
         color="#f97316"
       self.canvas.create_rectangle(x1, y1, x2, y2, fill=color, outline="")
+      
   def generate_new_array(self):
     #Function returns nothing if the algorithm is in the process of sorting.
     if self.is_sorting:
