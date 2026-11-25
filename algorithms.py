@@ -20,7 +20,7 @@ def bubble_sort(data):
         #If no swaps are made, it must be sorted...
         if not swapped:
             break
-    yeild arr.copy(), comps, swaps, ()
+    yield arr.copy(), comps, swaps, ()
 
 def insertion_sort(data):
     arr =  data.copy()
@@ -40,11 +40,28 @@ def insertion_sort(data):
             else:
                 break
         arr[j + 1] = key
-    yeild arr.copy(), comps, swaps()
-            
-           
+    yield arr.copy(), comps, swaps()
 
+def selection_sort(data):
+    arr = data.copy()
+    comps, swaps = 0, 0
+    n = len(arr)
+    for i in range(n):
+        min_idx = i
+        for j in range(i + 1, n):
+            comps += 1
+            yield arr.copy(), comps, swaps, (min_idx, j)
+            if arr[j] < arr[min_idx]:
+                min_idx = j
+            if min_idx != i:
+                arr[i], arr[min_idx] = arr[min_idx], arr[i]
+                swaps += 1
+                yield arr.copy(), comps, swaps, (i, min_idx)
+            yield arr.copy(), comps, swaps, ()
+            
 
 ALGORITHMS = {
-    "Bubble Sort": bubble_sort
+    "Bubble Sort": bubble_sort,
+    "Insertion Sort": insertion_sort,
+    "Selection Sort": selection_sort,
 }
